@@ -1,3 +1,5 @@
+from math import *
+
 class Complex:
 
     def __init__(self, Re_Part = 0, Im_Part = 0):
@@ -8,7 +10,7 @@ class Complex:
         return "({}{:+}i)".format(self.Re, self.Im)
 
     def __repr__(self):
-        return "Complex({}, {})".format(self.Re, self.Im)
+        return "Complex({}, {})".format(self.Re, self)
     
     def __eq__(self, sec_val):
         if self.Re == sec_val.Re and self.Im == sec_val.Im:
@@ -45,10 +47,13 @@ class Complex:
     def modulus(self):
         return (self.Re**2 + self.Im**2)**(1/2)
 
-Z1 = Complex(0,0)
-Z2 = Complex(11,-22)
-Z3 = Complex(-12,43)
-Z4 = Complex(99,11)
-Z5 = Complex(-64,-36)
+    def argument(self):
+        if self.Re == 0 and self.Im == 0:
+            raise ValueError('Incorrect complex form conversion (alg to trig - 0 value)')
+        if self.Re < 0 and self.Im == 0:
+            return pi
+        else:
+            return 2*atan(self.Im/(self.modulus()+self.Re))
+            
+        
 
-print(Z1+Z3/Z4-Z5*Z3)

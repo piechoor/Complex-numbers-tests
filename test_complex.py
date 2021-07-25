@@ -9,6 +9,7 @@ class TestComplex(unittest.TestCase):
         self.Z3 = Complex(-12,43)
         self.Z4 = Complex(99,11)
         self.Z5 = Complex(-64,-36)
+        self.Z6 = Complex(-11,0)
 
     def test_Print(self):
        self.assertEqual('(0+0i)', self.Z1.__str__())
@@ -55,3 +56,13 @@ class TestComplex(unittest.TestCase):
     def test_Modulus(self):
         self.assertEqual(self.Z1.modulus(), 0)
         self.assertAlmostEqual(self.Z3.modulus(), 44.64303, 5)
+
+    def test_argument(self):
+        with self.assertRaises(ValueError):
+            self.Z1.argument()
+        self.assertAlmostEqual(self.Z6.argument(), 3.14159, 5)
+        self.assertAlmostEqual(self.Z4.argument(), 0.110657, 5)
+        self.assertAlmostEqual(self.Z5.argument(), -2.62920, 5)
+
+if __name__ == "__main__":
+    unittest.main()
